@@ -1,7 +1,7 @@
 ##Overview
 
 drnglib (Digital Random Number Generator Library) is a Java library that provides access to Intel Secure Key,
-a hardware random number generator introduced in Ivy Bridge processors.
+a hardware random number generator introduced in the Ivy Bridge microarchitecture.
 
 ###See:
 
@@ -12,7 +12,7 @@ a hardware random number generator introduced in Ivy Bridge processors.
 
 ###To build drnglib jar:
 
-* [Intel IvyBridge CPU](http://en.wikipedia.org/wiki/Ivy_Bridge_%28microarchitecture%29)
+* [Intel Ivy Bridge CPU](http://en.wikipedia.org/wiki/Ivy_Bridge_%28microarchitecture%29)
 * [Java 7 JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 * [Maven 3](http://maven.apache.org/)
 * [git](http://git-scm.com/)
