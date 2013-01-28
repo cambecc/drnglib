@@ -1,4 +1,4 @@
-DRNGLIB (Digital Random Number Generator Library) is a Java library that provides access to hardware random number
+drnglib (Digital Random Number Generator Library) is a Java library that provides access to hardware random number
 generators, such as Intel Secure Key.
 
 See:
