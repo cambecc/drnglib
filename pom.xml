@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~~ drnglib Project definition
+  ~~
+  ~~ License: CC0 1.0 Universal, http://creativecommons.org/publicdomain/zero/1.0/
+  ~~
+  ~~ @author Cameron Beccario
+  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
+    <groupId>net.nullschool.util</groupId>
+    <artifactId>drnglib</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>drnglib</name>
+    <description>Digital Random Number Generator Library</description>
+    <url>https://github.com/cambecc/drnglib</url>
+
+    <licenses>
+        <license>
+            <name>CC0 1.0 Universal</name>
+            <url>http://creativecommons.org/publicdomain/zero/1.0/</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>cambecc</id>
+            <name>Cameron Beccario</name>
+            <email>cambecc@nullschool.net</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git@github.com:cambecc/drnglib.git</connection>
+        <developerConnection>scm:git:git@github.com:cambecc/drnglib.git</developerConnection>
+        <url>git@github.com:cambecc/drnglib.git</url>
+    </scm>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Compile with Java 7 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <compilerVersion>1.7</compilerVersion>
+                </configuration>
+            </plugin>
+
+            <!-- Run javah to generate the JNI C++ header file -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <id>javah</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <phase>process-test-classes</phase>
+                        <configuration>
+                            <mainClass>net.nullschool.util.JavahLauncher</mainClass>
+                            <classpathScope>test</classpathScope>
+                            <includePluginDependencies>true</includePluginDependencies>
+                            <arguments>
+                                <argument>-v</argument>
+                                <argument>-classpath</argument>
+                                <argument>${project.build.outputDirectory}</argument>
+                                <argument>-o</argument>
+                                <argument>${project.basedir}/src/main/c++/RdrandEngine_NativeMethods.h</argument>
+                                <argument>net.nullschool.util.RdrandEngine$NativeMethods</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.sun</groupId>
+                        <artifactId>tools</artifactId>
+                        <version>1.7.0</version>
+                        <scope>system</scope>
+                        <systemPath>${java.home}/../lib/tools.jar</systemPath>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <!-- Configure release plugin to play nice with git -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <localCheckout>true</localCheckout>
+                    <pushChanges>false</pushChanges>
+                </configuration>
+            </plugin>
+            
+        </plugins>
+    </build>
+
+</project>
