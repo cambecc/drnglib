@@ -52,7 +52,7 @@ bool Rdrand::checkSupported() {
      * sure to return the carry flag to signify success.
      */
     int _rdrand32_step(uint32_t* result) {
-        int success;
+        unsigned char success;
         asm volatile(
             ".byte 0x0f; .byte 0xc7; .byte 0xf0; setc %1" :
             "=a"(*result), "=qm"(success));
@@ -80,7 +80,7 @@ bool Rdrand::checkSupported() {
      * sure to return the carry flag to signify success.
      */
     int _rdrand64_step(uint64_t* result) {
-        int success;
+        unsigned char success;
         asm volatile(
             ".byte 0x48; .byte 0x0f; .byte 0xc7; .byte 0xf0; setc %1" :
             "=a"(*result), "=qm"(success));

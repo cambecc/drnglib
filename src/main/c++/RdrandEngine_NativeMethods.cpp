@@ -62,6 +62,6 @@ Java_net_nullschool_util_RdrandEngine_00024NativeMethods_rdrandBytes(
     if (!rdrand.nextBytes((uint8_t*)buffer, env->GetArrayLength(bytes), retries)) {
         env->ThrowNew(env->FindClass("java/lang/IllegalStateException"), VALUE_NOT_AVAILABLE);
     }
-    env->ReleaseByteArrayElements(bytes, buffer, NULL);
+    env->ReleaseByteArrayElements(bytes, buffer, 0);
     return;
 }
