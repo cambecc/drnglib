@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.io.*;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.regex.Pattern;
 import java.util.zip.DeflaterOutputStream;
 
@@ -32,6 +33,10 @@ public class RdrandEngineTest {
     private static Field getField(Class<?> clazz, String name) throws Exception {
         Field field = clazz.getDeclaredField(name);
         field.setAccessible(true);
+        // Allow setting of static final fields.
+        Field modifiers = Field.class.getDeclaredField("modifiers");
+        modifiers.setAccessible(true);
+        modifiers.setInt(field, field.getModifiers() & ~Modifier.FINAL);
         return field;
     }
 
@@ -205,7 +210,7 @@ public class RdrandEngineTest {
         assertTrue(zeroCount(seed) < 8);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NegativeArraySizeException.class)
     public void test_negative_seed_size_throws() {
         new RdrandEngine().engineGenerateSeed(-1);
     }
@@ -220,8 +225,8 @@ public class RdrandEngineTest {
         String original = System.getProperty("os.arch");
         try {
             // Change to an unsupported architecture and clear flags.
-            System.setProperty("os.arch", "Z80");
-            Class<?> nativeMethods = Class.forName(RdrandEngine.class.getName() + "$EntryPoints");
+            getField(EngineTools.class, "osarch").set(null, "Z80");
+            Class<?> nativeMethods = Class.forName(RdrandEngine.class.getName() + "$NativeMethods");
             getField(nativeMethods, "isLinked").setBoolean(null, false);
             getField(RdrandEngine.class, "isSupported").setBoolean(null, false);
 
@@ -244,7 +249,7 @@ public class RdrandEngineTest {
             }
         }
         finally {
-            System.setProperty("os.arch", original);
+            getField(EngineTools.class, "osarch").set(null, original);
         }
 
         // Confirm native library load now works after restoring original architecture.
