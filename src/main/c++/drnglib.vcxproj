@@ -96,6 +96,7 @@
             <AdditionalIncludeDirectories>
                 $(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;%(AdditionalIncludeDirectories)
             </AdditionalIncludeDirectories>
+            <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
         </ClCompile>
         <Link>
             <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -109,6 +110,7 @@
             <AdditionalIncludeDirectories>
                 $(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;%(AdditionalIncludeDirectories)
             </AdditionalIncludeDirectories>
+            <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
         </ClCompile>
         <Link>
             <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -124,6 +126,7 @@
             <AdditionalIncludeDirectories>
                 $(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;%(AdditionalIncludeDirectories)
             </AdditionalIncludeDirectories>
+            <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
         </ClCompile>
         <Link>
             <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -141,6 +144,7 @@
             <AdditionalIncludeDirectories>
                 $(JAVA_HOME)\include;$(JAVA_HOME)\include\win32;%(AdditionalIncludeDirectories)
             </AdditionalIncludeDirectories>
+            <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
         </ClCompile>
         <Link>
             <GenerateDebugInformation>true</GenerateDebugInformation>
