@@ -72,22 +72,22 @@
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
         <OutDir>..\..\..\target\</OutDir>
         <IntDir>..\..\..\target\native\$(Platform)\$(Configuration)\</IntDir>
-        <TargetName>$(ProjectName)_x86</TargetName>
+        <TargetName>$(ProjectName)-x86</TargetName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
         <OutDir>..\..\..\target\</OutDir>
         <IntDir>..\..\..\target\native\$(Platform)\$(Configuration)\</IntDir>
-        <TargetName>$(ProjectName)_x64</TargetName>
+        <TargetName>$(ProjectName)-x64</TargetName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
         <OutDir>..\..\..\target\</OutDir>
         <IntDir>..\..\..\target\native\$(Platform)\$(Configuration)\</IntDir>
-        <TargetName>$(ProjectName)_x86</TargetName>
+        <TargetName>$(ProjectName)-x86</TargetName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
         <OutDir>..\..\..\target\</OutDir>
         <IntDir>..\..\..\target\native\$(Platform)\$(Configuration)\</IntDir>
-        <TargetName>$(ProjectName)_x64</TargetName>
+        <TargetName>$(ProjectName)-x64</TargetName>
     </PropertyGroup>
     <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
         <ClCompile>

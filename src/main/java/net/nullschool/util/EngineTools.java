@@ -71,9 +71,26 @@ final class EngineTools {
     }
 
     static String deriveRdrandLibraryName() {
-        String lib = X86.contains(osarch) ? "drnglib_x86" : X64.contains(osarch) ? "drnglib_x64" : "unknown";
-        String extension = osname.startsWith("Win") ? ".dll" : osname.startsWith("Mac") ? ".dylib" : ".so";
-        return lib + extension;
+        String path = "unknown/";
+        String extension = ".unknown";
+        String arch = X86.contains(osarch) ? "-x86" : X64.contains(osarch) ? "-x64" : "-unknown";
+        if (osname.startsWith("Win")) {
+            path = "windows/";
+            extension = ".dll";
+        }
+        else if (osname.startsWith("Mac")) {
+            path = "macosx/";
+            extension = ".dylib";
+        }
+        else if (osname.startsWith("Lin")) {
+            path = "linux/";
+            extension = ".so";
+        }
+        else if (osname.startsWith("Sun")) {
+            path = "solaris/";
+            extension = ".so";
+        }
+        return path + "drnglib" + arch + extension;
     }
 
     static void loadRdrandNativeLibrary() throws IOException {
