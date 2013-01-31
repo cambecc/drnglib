@@ -35,20 +35,23 @@ class RdrandEngine extends DigitalRandomSpi {
         }
     }
 
+    static boolean isSupported() throws IOException {
+        NativeMethods.link();
+        return NativeMethods.isRdrandSupported();
+    }
+
     RdrandEngine() throws UnsupportedOperationException {
         if (!isSupported) {
-            Throwable cause = null;
             try {
-                NativeMethods.link();
-                isSupported = NativeMethods.isRdrandSupported();
+                if (!(isSupported = isSupported())) {
+                    throw new UnsupportedOperationException(
+                        "Random number generation using rdrand is not supported by this CPU.");
+                }
             }
             catch (Throwable t) {
-                cause = t;
-            }
-            if (!isSupported) {
                 throw new UnsupportedOperationException(
-                    "Random number generation using rdrand is not supported.",
-                    cause);
+                    "Random number generation using rdrand is not supported because engine initialization failed.",
+                    t);
             }
         }
     }

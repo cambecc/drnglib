@@ -1,5 +1,7 @@
 package net.nullschool.util;
 
+import org.junit.Assume;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -54,13 +56,15 @@ public class RdrandEngineTest {
     }
 
     @BeforeClass
-    public static void beforeClass() {
-        try {
-            new RdrandEngine();
-        }
-        catch (Exception e) {
-            throw new RuntimeException("Cannot construct RdrandEngine, so all tests fail.", e);
-        }
+    public static void beforeClass() throws IOException {
+        // If this throws, then native method linking failed, which means we can't even ask the CPU if
+        // it supports rdrand.
+        RdrandEngine.isSupported();
+    }
+
+    @Before
+    public void beforeMethod() throws IOException {
+        Assume.assumeTrue("Rdrand not supported by this CPU.", RdrandEngine.isSupported());
     }
 
     @Test
