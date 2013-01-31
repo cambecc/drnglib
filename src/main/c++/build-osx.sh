@@ -1,4 +1,4 @@
 set -e
 set -x
-g++ -I$JAVA_HOME/include -I$JAVA_HOME/include/darwin -shared *.cpp -o ../../../target/drnglib_x64.dylib
-cp ../../../target/drnglib_x64.dylib ../resources/net/nullschool/util/
+g++ -m64 -dynamiclib -fast -fPIC -I$JAVA_HOME/include -I$JAVA_HOME/include/darwin *.cpp -o drnglib_x64.dylib
+mv drnglib_x64.dylib ../resources/net/nullschool/util/
