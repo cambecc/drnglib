@@ -1,13 +1,37 @@
 ##Overview
 
-drnglib (Digital Random Number Generator Library) is a Java library that provides access to Intel Secure Key,
-a hardware random number generator introduced in the Ivy Bridge microarchitecture.
+**drnglib** (Digital Random Number Generator Library) is a Java library that provides access to _Intel Secure Key_, the
+hardware random number generator introduced in the Ivy Bridge microarchitecture. This library retrieves cryptographically
+secure random values directly from the CPU using the `RDRAND` instruction. Access to `RDRAND` is implemented by a small
+native library embedded as a resource in the .jar file.
 
-###See:
+The **DigitalRandom** class is provided as a drop-in replacement for
+[SecureRandom](http://docs.oracle.com/javase/7/docs/api/java/security/SecureRandom.html). It is thread-safe and stateless.
+All thread synchronization occurs in the hardware implementation of `RDRAND`.
 
-* http://software.intel.com/en-us/articles/intel-digital-random-number-generator-drng-software-implementation-guide
-* http://www.cryptography.com/public/pdf/Intel_TRNG_Report_20120312.pdf
+For more information see:
+* [Wikipedia: RDRAND](http://en.wikipedia.org/wiki/RDRAND)
+* [Intel DRNG Software Implementation Guide](http://software.intel.com/en-us/articles/intel-digital-random-number-generator-drng-software-implementation-guide)
+* [Analysis of Intel's Ivy Bridge Digital Random Number Generator](http://www.cryptography.com/public/pdf/Intel_TRNG_Report_20120312.pdf) `PDF`
 
+##Usage
+
+1. Add the following maven dependency to your project:
+```xml
+    <dependency>
+        <groupId>net.nullschool</groupId>
+        <artifactId>drnglib</artifactId>
+        <version>0.9.0</version>
+    </dependency>
+```
+
+2. Create an instance of `DigitalRandom` located in the `net.nullschool.util` package:
+```java
+
+    DigitalRandom random = new DigitalRandom();
+    System.out.println(random.nextInt());
+```
+    
 ##Requirements
 
 ###To build drnglib jar:
