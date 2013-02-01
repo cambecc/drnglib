@@ -69,6 +69,6 @@ must be built from a toolset for the associated operating system. This usually m
 Mac OSX for .dylib, and Linux for .so. To build one particular flavor:
 
 1. make sure the `JAVA_HOME` environment variable is defined to point to your Java 7 JDK
-2. from the `drnglib/src/main/c++/` directory, invoke the appropriate build script, e.g., `./build-osx.sh`
+2. from the `drnglib/src/main/c++/` directory, invoke the appropriate build script, e.g., `./build-macosx.sh`
 3. rebuild the java jar to incorporate your native library. From the `drnglib/` directory, do a maven build:
 `mvn clean install`
