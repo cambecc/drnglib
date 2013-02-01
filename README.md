@@ -37,12 +37,14 @@ Follow these two steps to start generating random numbers:
 Your project will need [Java 7](http://www.oracle.com/technetwork/java/javase/downloads/index.html) and an
 [Intel Ivy Bridge CPU](http://en.wikipedia.org/wiki/Ivy_Bridge_%28microarchitecture%29). If the CPU does not contain
 a hardware random number generator, instantiation of `DigitalRandom` will throw `UnsupportedOperationException`.
-    
+
+**drnglib** runs on Windows, Mac OSX, and Linux. (Adding support for other operation systems simply requires building
+the native library code on the desired platform.)
+
 ##Build Requirements
 
 ###To build drnglib jar:
 
-* [Intel Ivy Bridge CPU](http://en.wikipedia.org/wiki/Ivy_Bridge_%28microarchitecture%29)
 * [Java 7 JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 * [Maven 3](http://maven.apache.org/)
 * [git](http://git-scm.com/)
