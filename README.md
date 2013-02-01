@@ -1,13 +1,13 @@
 ##Overview
 
-**drnglib** (Digital Random Number Generator Library) is a Java library that provides access to _Intel Secure Key_, the
-hardware random number generator introduced in the Ivy Bridge microarchitecture. This library retrieves cryptographically
-secure random values directly from the CPU using the `RDRAND` instruction. Access to `RDRAND` is implemented by a small
-native library embedded as a resource in the .jar file.
+**drnglib** (Digital Random Number Generator Library) is a Java 7 library that provides access to _Intel Secure Key_,
+the hardware random number generator introduced in the Ivy Bridge microarchitecture. This library retrieves
+cryptographically secure random values directly from the CPU using the `RDRAND` instruction. Access to `RDRAND` is
+implemented by a small native library embedded as a resource in the .jar file.
 
 The **DigitalRandom** class is provided as a drop-in replacement for
-[SecureRandom](http://docs.oracle.com/javase/7/docs/api/java/security/SecureRandom.html). It is thread-safe and stateless.
-All thread synchronization occurs in the hardware implementation of `RDRAND`.
+[SecureRandom](http://docs.oracle.com/javase/7/docs/api/java/security/SecureRandom.html). It is thread-safe and
+stateless. All thread synchronization occurs in the hardware implementation of `RDRAND`.
 
 For more information see:
 * [Wikipedia: RDRAND](http://en.wikipedia.org/wiki/RDRAND)
@@ -16,12 +16,14 @@ For more information see:
 
 ##Usage
 
-1. Add the following maven dependency to your project:
+Follow these two steps to start generating random numbers:
+
+1. Add the following dependency to your project ([published on Maven Central](http://search.maven.org/#search|ga|1|a%3A%22drnglib%22%20g%3A%22net.nullschool%22)):
 ```xml
     <dependency>
         <groupId>net.nullschool</groupId>
         <artifactId>drnglib</artifactId>
-        <version>0.9.0</version>
+        <version>{latest version on central}</version>
     </dependency>
 ```
 
@@ -31,8 +33,12 @@ For more information see:
     DigitalRandom random = new DigitalRandom();
     System.out.println(random.nextInt());
 ```
+
+Your project will need [Java 7](http://www.oracle.com/technetwork/java/javase/downloads/index.html) and an
+[Intel Ivy Bridge CPU](http://en.wikipedia.org/wiki/Ivy_Bridge_%28microarchitecture%29). If the CPU does not contain
+a hardware random number generator, instantiation of `DigitalRandom` will throw `UnsupportedOperationException`.
     
-##Requirements
+##Build Requirements
 
 ###To build drnglib jar:
 
