@@ -3,7 +3,6 @@ package net.nullschool.util;
 import org.junit.Test;
 
 import java.lang.reflect.AccessibleObject;
-import java.util.Arrays;
 import java.util.UUID;
 
 import static org.junit.Assert.*;
@@ -257,103 +256,4 @@ public class DigitalRandomTest {
         assertEquals("DRNG", dr.getAlgorithm());
         assertNull(dr.getProvider());
     }
-
-//    @Test
-//    public void test_multiple_thread_throughput() throws Exception {
-//        final DigitalRandom dr = new DigitalRandom();
-//
-//        class Task implements Callable<Long> {
-//
-//            private final int samples;
-//
-//            Task(int samples) {
-//                this.samples = samples;
-//            }
-//
-//            @Override
-//            public Long call() throws Exception {
-//                long result = 0;
-//                for (int i = 0; i < samples; i++) {
-//                    result += dr.nextLong();
-//                }
-//                return result;
-//            }
-//        }
-//
-//        ExecutorService es = Executors.newCachedThreadPool();
-//        List<Task> tasks;
-//        List<Long> results;
-//
-//        tasks = new ArrayList<>();
-//        results = new ArrayList<>();
-//        for (int i = 0; i < Runtime.getRuntime().availableProcessors() * 2; i++) {
-//            tasks.add(new Task(5000000));
-//        }
-//        for (Future<Long> future : es.invokeAll(tasks)) {
-//            results.add(future.get());
-//        }
-//        System.out.println(results);
-//        System.out.println("START");
-//
-//        // do it again, but measure
-//        final int max = 100000000;
-//        final long threadCount = Runtime.getRuntime().availableProcessors();
-//        tasks = new ArrayList<>();
-//        results = new ArrayList<>();
-//        for (int i = 0; i < threadCount; i++) {
-//            tasks.add(new Task(max));
-//        }
-//        long start = System.nanoTime();
-//        for (Future<Long> future : es.invokeAll(tasks)) {
-//            results.add(future.get());
-//        }
-//        long duration = System.nanoTime() - start;
-//        System.out.println(results);
-//        System.out.println("Threads:    " + threadCount);
-//        System.out.println("Duration:   " + duration);
-//        System.out.println("samples:    " + (max * threadCount));
-//        System.out.println("samples/ms: " + (max * threadCount) / (double)duration * 1000000);
-//        System.out.println("MB/s:       " + (long)((double)(max * threadCount * 8) / (double)duration * 1000));
-//        System.out.println("ns/sample:  " + (double)duration / (max * threadCount));
-//    }
-
-//    @Test
-//    public void test_next_uuid_perf() {
-//        DigitalRandom dr = new DigitalRandom();
-//
-//        System.out.println("begin warmup");
-//        for (int i = 0; i < 1000000; i++) {
-//            UUID.randomUUID();
-//            dr.nextUUID();
-//        }
-//        System.out.println("begin test " + System.nanoTime());
-//
-//        long start1 = System.nanoTime();
-//        for (int i = 0; i < 10000000; i++) {
-//            UUID.randomUUID();
-//        }
-//        long end1 = System.nanoTime();
-//
-//        long start2 = System.nanoTime();
-//        for (int i = 0; i < 10000000; i++) {
-//            dr.nextUUID();
-//        }
-//        long end2 = System.nanoTime();
-//
-//        long start3 = System.nanoTime();
-//        for (int i = 0; i < 10000000; i++) {
-//            UUID.randomUUID();
-//        }
-//        long end3 = System.nanoTime();
-//
-//        long start4 = System.nanoTime();
-//        for (int i = 0; i < 10000000; i++) {
-//            dr.nextUUID();
-//        }
-//        long end4 = System.nanoTime();
-//        System.out.println("UUID.random: " + (end1 - start1) + " " + (end1 - start1) / 10000000);
-//        System.out.println("rdrand     : " + (end2 - start2) + " " + (end2 - start2) / 10000000);
-//        System.out.println("UUID.random: " + (end3 - start3) + " " + (end3 - start3) / 10000000);
-//        System.out.println("rdrand     : " + (end4 - start4) + " " + (end4 - start4) / 10000000);
-//    }
 }
