@@ -10,6 +10,8 @@ import static org.junit.Assert.*;
 /**
  * 2013-01-09<p/>
  *
+ * Released to the public domain: http://creativecommons.org/publicdomain/zero/1.0/
+ *
  * @author Cameron Beccario
  */
 public class DigitalRandomTest {

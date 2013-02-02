@@ -3,6 +3,8 @@
  *
  * A utility class for invoking RDRAND instructions.
  *
+ * Released to the public domain: http://creativecommons.org/publicdomain/zero/1.0/
+ *
  * @author Cameron Beccario
  */
 

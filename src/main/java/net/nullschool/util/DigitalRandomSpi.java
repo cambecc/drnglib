@@ -7,7 +7,9 @@ import java.security.SecureRandomSpi;
  * 2013-01-25<p/>
  *
  * An extension of {@link SecureRandomSpi} to provide more methods to instances of
- * {@link DigitalRandom} for generating random data.
+ * {@link DigitalRandom} for generating random data.<p/>
+ *
+ * Released to the public domain: http://creativecommons.org/publicdomain/zero/1.0/
  *
  * @author Cameron Beccario
  */

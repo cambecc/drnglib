@@ -9,6 +9,8 @@ import static net.nullschool.util.EngineTools.*;
 /**
  * 2012-12-08<p/>
  *
+ * Released to the public domain: http://creativecommons.org/publicdomain/zero/1.0/
+ *
  * @author Cameron Beccario
  */
 class RdrandEngine extends DigitalRandomSpi {

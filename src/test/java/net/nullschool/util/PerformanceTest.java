@@ -13,6 +13,8 @@ import java.util.concurrent.*;
  * Some micro-benchmarks, represented as Tasks that are executed and measured through a common harness.
  * Run with "-Xms1G -Xmx2G -XX:+PrintCompilation -XX:+PrintGCDetails"
  *
+ * Released to the public domain: http://creativecommons.org/publicdomain/zero/1.0/
+ *
  * @author Cameron Beccario
  */
 public class PerformanceTest {

@@ -23,7 +23,9 @@ import java.util.UUID;
  * the DRNG and are expected to be very rare.<p/>
  *
  * This class is thread safe and can be used by multiple threads for maximum performance. Except for
- * {@link #nextGaussian()}, this class performs no synchronization.
+ * {@link #nextGaussian()}, this class performs no synchronization.<p/>
+ *
+ * Released to the public domain: http://creativecommons.org/publicdomain/zero/1.0/
  *
  * @author Cameron Beccario
  */

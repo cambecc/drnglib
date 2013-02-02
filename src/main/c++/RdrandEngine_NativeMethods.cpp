@@ -4,6 +4,8 @@
  * Implementation of the JNI entry points. An RDRAND failure, which should be exceedingly
  * rare, is communicated to the calling Java program as an IllegalStateException.
  *
+ * Released to the public domain: http://creativecommons.org/publicdomain/zero/1.0/
+ *
  * @author Cameron Beccario
  */
 

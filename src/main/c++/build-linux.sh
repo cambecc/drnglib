@@ -1,3 +1,4 @@
+# TODO: convert to make
 set -e
 set -x
 FLAGS="-shared -static-libgcc -static-libstdc++ -O3"

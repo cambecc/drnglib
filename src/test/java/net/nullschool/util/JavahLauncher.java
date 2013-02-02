@@ -12,6 +12,8 @@ import java.lang.reflect.Method;
  * replace an existing file simply due to differences in line separators, thus avoiding version control
  * noise.<p/>
  *
+ * Released to the public domain: http://creativecommons.org/publicdomain/zero/1.0/
+ *
  * @author Cameron Beccario
  */
 public class JavahLauncher {

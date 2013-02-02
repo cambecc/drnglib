@@ -5,6 +5,8 @@
  * for some methods due to inconsistent RDRAND support among compilers. Tested
  * on GCC 4.2.1 and MSVC 11.0.
  *
+ * Released to the public domain: http://creativecommons.org/publicdomain/zero/1.0/
+ *
  * @author Cameron Beccario
  */
 

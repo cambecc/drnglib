@@ -15,6 +15,8 @@ import java.util.Random;
 /**
  * 2013-01-25<p/>
  *
+ * Released to the public domain: http://creativecommons.org/publicdomain/zero/1.0/
+ *
  * @author Cameron Beccario
  */
 final class EngineTools {

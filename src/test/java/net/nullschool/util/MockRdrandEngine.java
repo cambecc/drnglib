@@ -3,6 +3,8 @@ package net.nullschool.util;
 /**
  * 2013-01-23<p/>
  *
+ * Released to the public domain: http://creativecommons.org/publicdomain/zero/1.0/
+ *
  * @author Cameron Beccario
  */
 class MockRdrandEngine extends DigitalRandomSpi {

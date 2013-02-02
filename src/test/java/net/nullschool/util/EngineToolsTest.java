@@ -11,6 +11,8 @@ import static net.nullschool.util.EngineTools.*;
 /**
  * 2013-01-07<p/>
  *
+ * Released to the public domain: http://creativecommons.org/publicdomain/zero/1.0/
+ *
  * @author Cameron Beccario
  */
 public class EngineToolsTest {
