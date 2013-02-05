@@ -33,7 +33,7 @@ static const int MAX_ATTEMPTS = 10;
     /**
      * GCC doesn't have a CPUID intrinsic, so we need to make one.
      */
-    void __cpuid(uint32_t* result, int function) {
+    void __cpuid(int* result, int function) {
         __asm volatile(
             "cpuid" :
             "=a"(result[0]), "=b"(result[1]), "=c"(result[2]), "=d"(result[3]) :

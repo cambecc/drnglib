@@ -8,11 +8,11 @@
 extern "C" {
 #endif
 #undef net_nullschool_util_RdrandEngine_serialVersionUID
-#define net_nullschool_util_RdrandEngine_serialVersionUID -2991854161009191830i64
+#define net_nullschool_util_RdrandEngine_serialVersionUID -2991854161009191830LL
 #undef net_nullschool_util_RdrandEngine_serialVersionUID
-#define net_nullschool_util_RdrandEngine_serialVersionUID 1i64
+#define net_nullschool_util_RdrandEngine_serialVersionUID 1LL
 #undef net_nullschool_util_RdrandEngine_serialVersionUID
-#define net_nullschool_util_RdrandEngine_serialVersionUID 1i64
+#define net_nullschool_util_RdrandEngine_serialVersionUID 1LL
 /*
  * Class:     net_nullschool_util_RdrandEngine
  * Method:    isRdrandSupported
