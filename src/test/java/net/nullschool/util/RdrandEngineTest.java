@@ -232,7 +232,7 @@ public class RdrandEngineTest {
         try {
             // Change to an unsupported architecture and clear flags.
             getField(EngineTools.class, "osarch").set(null, "Z80");
-            Class<?> nativeMethods = Class.forName(RdrandEngine.class.getName() + "$NativeMethods");
+            Class<?> nativeMethods = RdrandEngine.class;
             getField(nativeMethods, "isLinked").setBoolean(null, false);
             getField(RdrandEngine.class, "isSupported").setBoolean(null, false);
 

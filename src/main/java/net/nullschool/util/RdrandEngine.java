@@ -4,32 +4,25 @@ import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
 import java.security.Key;
 
-import static net.nullschool.util.EngineTools.*;
+import static net.nullschool.util.EngineTools.hashSHA256;
+import static net.nullschool.util.EngineTools.loadRdrandNativeLibrary;
+
 
 /**
- * 2012-12-08<p/>
+ * 2013-02-02<p/>
  *
  * Released to the public domain: http://creativecommons.org/publicdomain/zero/1.0/
  *
  * @author Cameron Beccario
  */
-class RdrandEngine extends DigitalRandomSpi {
+final class RdrandEngine extends DigitalRandomSpi {
 
     private static volatile boolean isSupported;
+    private static volatile boolean isLinked;
+    private static final Object lock = new Object();
 
-    private static class NativeMethods {
-
-        private static volatile boolean isLinked;
-
-        private static native boolean isRdrandSupported();
-
-        private static native int rdrand32(int retries) throws IllegalStateException;
-
-        private static native long rdrand64(int retries) throws IllegalStateException;
-
-        private static native void rdrandBytes(byte[] bytes, int retries) throws IllegalStateException;
-
-        private synchronized static void link() throws IOException {
+    private static void link() throws IOException {
+        synchronized (lock) {
             if (!isLinked) {
                 loadRdrandNativeLibrary();
                 isLinked = true;
@@ -37,13 +30,15 @@ class RdrandEngine extends DigitalRandomSpi {
         }
     }
 
+    private static native boolean isRdrandSupported();
+
     static boolean linkAndCheckSupported() {
         if (isSupported) {
             return true;
         }
         try {
-            NativeMethods.link();
-            return isSupported = NativeMethods.isRdrandSupported();
+            link();
+            return isSupported = isRdrandSupported();
         }
         catch (Throwable t) {
             throw new UnsupportedOperationException(
@@ -51,6 +46,7 @@ class RdrandEngine extends DigitalRandomSpi {
                 t);
         }
     }
+
 
     RdrandEngine() throws UnsupportedOperationException {
         if (!linkAndCheckSupported()) {
@@ -70,19 +66,13 @@ class RdrandEngine extends DigitalRandomSpi {
     }
 
     @Override
-    protected int engineNextInt() {
-        return NativeMethods.rdrand32(10);
-    }
+    protected native int engineNextInt();
 
     @Override
-    protected long engineNextLong() {
-        return NativeMethods.rdrand64(10);
-    }
+    protected native long engineNextLong();
 
     @Override
-    protected void engineNextBytes(byte[] bytes) {
-        NativeMethods.rdrandBytes(bytes, 10);
-    }
+    protected native void engineNextBytes(byte[] bytes);
 
     private byte[] nextBytes(byte[] bytes) {
         engineNextBytes(bytes);

@@ -113,8 +113,8 @@
                                 <argument>-classpath</argument>
                                 <argument>${project.build.outputDirectory}</argument>
                                 <argument>-o</argument>
-                                <argument>${project.basedir}/src/main/c++/RdrandEngine_NativeMethods.h</argument>
-                                <argument>net.nullschool.util.RdrandEngine$NativeMethods</argument>
+                                <argument>${project.basedir}/src/main/c++/RdrandEngine.h</argument>
+                                <argument>net.nullschool.util.RdrandEngine</argument>
                             </arguments>
                         </configuration>
                     </execution>
