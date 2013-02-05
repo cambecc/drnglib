@@ -285,24 +285,19 @@ Java_net_nullschool_util_RdrandEngine_engineNextBytes(JNIEnv* env, jobject obj, 
         return;
     }
 
-    buffer = (*env)->GetByteArrayElements(env, bytes, NULL);  // UNDONE: result may be null
+    // UNDONE: GetByteArrayElements seems to always copy. Maybe that's okay even if input array is 100MB.
+    //         But perhaps it would be better to fill the java array in chunks using SetByteArrayRegion, to
+    //         avoid a huge array copy.
     length = (*env)->GetArrayLength(env, bytes);
+    buffer = (*env)->GetByteArrayElements(env, bytes, NULL);
+    if (buffer == NULL) {
+        throwNew(env, ILLEGAL_ARGUMENT_EXCEPTION, "Failed to get byte array.");
+        return;
+    }
 
     if (!rdrandFill((uint8_t*)buffer, length)) {
         throwNew(env, ILLEGAL_STATE_EXCEPTION, VALUE_NOT_AVAILABLE);
     }
 
     (*env)->ReleaseByteArrayElements(env, bytes, buffer, 0);
-    /*
-    // not possible for copy to be made when assigning into the JVM's array
-    Set<PrimitiveType>ArrayRegion Routines
-    void Set<PrimitiveType>ArrayRegion(JNIEnv *env, ArrayType array,
-    jsize start, jsize len, const NativeType *buf);
-
-    // may copy the entire array, but chances are it will not. but dangerous.
-    GetPrimitiveArrayCritical
-    ReleasePrimitiveArrayCritical
-    void * GetPrimitiveArrayCritical(JNIEnv *env, jarray array, jboolean *isCopy);
-    void ReleasePrimitiveArrayCritical(JNIEnv *env, jarray array, void *carray, jint mode);
-    */
 }
