@@ -7,7 +7,7 @@ package net.nullschool.util;
  *
  * @author Cameron Beccario
  */
-class MockRdrandEngine extends DigitalRandomSpi {
+class MockRdRandEngine extends DigitalRandomSpi {
 
     private static final long serialVersionUID = 1;
 
@@ -15,7 +15,7 @@ class MockRdrandEngine extends DigitalRandomSpi {
     private final long[] values;
     private int i;
 
-    MockRdrandEngine(long... values) {
+    MockRdRandEngine(long... values) {
         this.values = values;
     }
 

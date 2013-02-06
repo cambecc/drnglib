@@ -1,7 +1,7 @@
 /**
  * 2013-02-03
  *
- * Implementation of the JNI entry points. An RDRAND failure, which should be exceedingly
+ * Implementation of the JNI entry points. An rdrand failure, which should be exceedingly
  * rare, is communicated to the calling Java program as an IllegalStateException.
  *
  * Released to the public domain: http://creativecommons.org/publicdomain/zero/1.0/
@@ -9,7 +9,7 @@
  * @author Cameron Beccario
  */
 
-#include "RdrandEngine.h"
+#include "RdRandEngine.h"
 
 #include <stdint.h>
 #if defined(_MSC_VER)
@@ -42,7 +42,7 @@ static const int MAX_ATTEMPTS = 10;
 #endif
 
 /**
- * Returns true if the processor supports the RDRAND instruction.
+ * Returns non-zero value if the processor supports the rdrand instruction.
  * See http://en.wikipedia.org/wiki/CPUID
  */
 int checkSupported() {
@@ -59,9 +59,9 @@ int checkSupported() {
 
 #if defined(__GNUC__)
     /**
-     * Generate 32 bits of random data with RDRAND. Returns 0 if the operation failed.
+     * Generate 32 bits of random data with rdrand. Returns 0 if the operation failed.
      *
-     * GCC may be too old to understand RDRAND, so manually specify it. Make
+     * GCC may be too old to understand rdrand, so manually specify it. Make
      * sure to return the carry flag to signify success.
      */
     int _rdrand32_step(uint32_t* result) {
@@ -87,24 +87,24 @@ int rdrand32(uint32_t* result) {
 
 #if defined(_X86)
     /**
-     * Generate 64 bits of random data with RDRAND. Returns 0 if the operation failed.
+     * Generate 64 bits of random data with rdrand. Returns 0 if the operation failed.
      *
-     * Simulate a 64-bit RDRAND invocation on a 32-bit platform by invoking 32-bit RDRAND
+     * Simulate a 64-bit rdrand invocation on a 32-bit platform by invoking 32-bit rdrand
      * twice and combining the results.
      */
     int _rdrand64_step(uint64_t* result) {
         uint32_t* halves = (uint32_t*)result;
         int success = _rdrand32_step(&halves[0]) & _rdrand32_step(&halves[1]);
         if (!success) {
-            halves[0] = halves[1] = 0;  // We failed, so zero the result as 64-bit RDRAND would have.
+            halves[0] = halves[1] = 0;  // We failed, so zero the result as 64-bit rdrand would have.
         }
         return success;
     }
 #elif defined(__GNUC__)
     /**
-     * Generate 64 bits of random data with RDRAND. Returns 0 if the operation failed.
+     * Generate 64 bits of random data with rdrand. Returns 0 if the operation failed.
      *
-     * GCC may be too old to understand RDRAND, so manually specify it. Make
+     * GCC may be too old to understand rdrand, so manually specify it. Make
      * sure to return the carry flag to signify success.
      */
     int _rdrand64_step(uint64_t* result) {
@@ -132,8 +132,8 @@ int rdrand64(uint64_t* result) {
  * Align the specified pointer down to the nearest byte boundary specified by "alignment".
  */
 uint8_t* align_floor(uint8_t* p, int alignment) {
-    int extra = ((uintptr_t)p) % alignment;
-    return p - extra;
+    int remainder = ((uintptr_t)p) % alignment;
+    return p - remainder;
 }
 
 /**
@@ -144,7 +144,7 @@ uint8_t* align_ceiling(uint8_t* p, int alignment) {
 }
 
 /**
- * From cursor to end (exclusive), fill with random bytes from one invocation of 32-bit RDRAND.
+ * From cursor to end (exclusive), fill with random bytes from one invocation of 32-bit rdrand.
  */
 int rdrand32_fill(uint8_t* cursor, uint8_t* end) {
     if (cursor < end) {
@@ -161,7 +161,7 @@ int rdrand32_fill(uint8_t* cursor, uint8_t* end) {
 }
 
 /**
- * From cursor to end (exclusive), fill with random bytes from one invocation of 64-bit RDRAND.
+ * From cursor to end (exclusive), fill with random bytes from one invocation of 64-bit rdrand.
  */
 int rdrand64_fill(uint8_t* cursor, uint8_t* end) {
     if (cursor < end) {
@@ -253,12 +253,12 @@ JNI_OnLoad(JavaVM* vm, void* reserved) {
 }
 
 JNIEXPORT jboolean JNICALL
-Java_net_nullschool_util_RdrandEngine_isRdrandSupported(JNIEnv* env, jclass clazz) {
+Java_net_nullschool_util_RdRandEngine_isRdRandSupported(JNIEnv* env, jclass clazz) {
     return checkSupported();
 }
 
 JNIEXPORT jint JNICALL
-Java_net_nullschool_util_RdrandEngine_engineNextInt(JNIEnv* env, jobject obj) {
+Java_net_nullschool_util_RdRandEngine_engineNextInt(JNIEnv* env, jobject obj) {
     uint32_t result;
     if (!rdrand32(&result)) {
         throwNew(env, ILLEGAL_STATE_EXCEPTION, VALUE_NOT_AVAILABLE);
@@ -267,7 +267,7 @@ Java_net_nullschool_util_RdrandEngine_engineNextInt(JNIEnv* env, jobject obj) {
 }
 
 JNIEXPORT jlong JNICALL
-Java_net_nullschool_util_RdrandEngine_engineNextLong(JNIEnv* env, jobject obj) {
+Java_net_nullschool_util_RdRandEngine_engineNextLong(JNIEnv* env, jobject obj) {
     uint64_t result;
     if (!rdrand64(&result)) {
         throwNew(env, ILLEGAL_STATE_EXCEPTION, VALUE_NOT_AVAILABLE);
@@ -276,12 +276,12 @@ Java_net_nullschool_util_RdrandEngine_engineNextLong(JNIEnv* env, jobject obj) {
 }
 
 JNIEXPORT void JNICALL
-Java_net_nullschool_util_RdrandEngine_engineNextBytes(JNIEnv* env, jobject obj, jbyteArray bytes) {
+Java_net_nullschool_util_RdRandEngine_engineNextBytes(JNIEnv* env, jobject obj, jbyteArray bytes) {
     jbyte* buffer;
     jsize length;
 
     if (bytes == NULL) {
-        throwNew(env, ILLEGAL_ARGUMENT_EXCEPTION, NULL);
+        throwNew(env, ILLEGAL_ARGUMENT_EXCEPTION, "null byte array.");
         return;
     }
 

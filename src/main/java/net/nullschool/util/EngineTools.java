@@ -72,7 +72,7 @@ final class EngineTools {
         return result;
     }
 
-    static String deriveRdrandLibraryName() {
+    static String deriveRdRandLibraryName() {
         String path = "unknown/";
         String extension = ".unknown";
         String arch = X86.contains(osarch) ? "-x86" : X64.contains(osarch) ? "-x64" : "-unknown";
@@ -95,16 +95,16 @@ final class EngineTools {
         return path + "drnglib" + arch + extension;
     }
 
-    static void loadRdrandNativeLibrary() throws IOException {
-        String library = deriveRdrandLibraryName();
+    static void loadRdRandNativeLibrary() throws IOException {
+        String library = deriveRdRandLibraryName();
 
-        if (RdrandEngine.class.getResource(library) == null) {
+        if (RdRandEngine.class.getResource(library) == null) {
             throw new IllegalArgumentException(
                 String.format("Cannot find resource '%s' for %s %s architecture.", library, osname, osarch));
         }
 
         for (int i = 0; i < 10; i++) {  // UNDONE: magic number 10?
-            Path p = unpackTemporaryResource(RdrandEngine.class, library);
+            Path p = unpackTemporaryResource(RdRandEngine.class, library);
             if (p == null || !Files.exists(p)) {
                 break;
             }

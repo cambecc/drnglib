@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
  *
  * @author Cameron Beccario
  */
-public class RdrandEngineTest {
+public class RdRandEngineTest {
 
     private static final int SAMPLE_SIZE = 1000;
 
@@ -61,18 +61,18 @@ public class RdrandEngineTest {
     public static void beforeClass() throws IOException {
         // If this throws, then native method linking failed, which means we can't even ask the CPU if
         // it supports rdrand.
-        RdrandEngine.linkAndCheckSupported();
+        RdRandEngine.linkAndCheckSupported();
     }
 
     @Before
     public void beforeMethod() throws IOException {
-        Assume.assumeTrue("Rdrand not supported by this CPU.", RdrandEngine.linkAndCheckSupported());
+        Assume.assumeTrue("RdRand not supported by this CPU.", RdRandEngine.linkAndCheckSupported());
     }
 
     @Test
     public void test_byte_randomness() throws IOException {
         // A blob of random samples should not be compressible.
-        RdrandEngine re = new RdrandEngine();
+        RdRandEngine re = new RdRandEngine();
         ByteArrayOutputStream compressed = new ByteArrayOutputStream();
         try (ObjectOutputStream out = newCompressor(compressed)) {
             byte[] bytes = new byte[SAMPLE_SIZE];
@@ -87,7 +87,7 @@ public class RdrandEngineTest {
     @Test
     public void test_int_randomness() throws IOException {
         // A blob of random samples should not be compressible.
-        RdrandEngine re = new RdrandEngine();
+        RdRandEngine re = new RdRandEngine();
         ByteArrayOutputStream compressed = new ByteArrayOutputStream();
         try (ObjectOutputStream out = newCompressor(compressed)) {
             for (int i = 0; i < SAMPLE_SIZE; i++) {
@@ -102,7 +102,7 @@ public class RdrandEngineTest {
     @Test
     public void test_long_randomness() throws IOException {
         // A blob of random samples should not be compressible.
-        RdrandEngine re = new RdrandEngine();
+        RdRandEngine re = new RdRandEngine();
         ByteArrayOutputStream compressed = new ByteArrayOutputStream();
         try (ObjectOutputStream out = newCompressor(compressed)) {
             for (int i = 0; i < SAMPLE_SIZE; i++) {
@@ -117,7 +117,7 @@ public class RdrandEngineTest {
     @Test
     public void test_seed_randomness() throws IOException {
         // A blob of random seed data should not be compressible.
-        RdrandEngine re = new RdrandEngine();
+        RdRandEngine re = new RdRandEngine();
         ByteArrayOutputStream compressed = new ByteArrayOutputStream();
         try (ObjectOutputStream out = newCompressor(compressed)) {
             out.write(re.engineGenerateSeed(SAMPLE_SIZE));
@@ -141,12 +141,12 @@ public class RdrandEngineTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void test_null_next_bytes_throws() {
-        new RdrandEngine().engineNextBytes(null);
+        new RdRandEngine().engineNextBytes(null);
     }
 
     @Test
     public void test_next_bytes() {
-        RdrandEngine re = new RdrandEngine();
+        RdRandEngine re = new RdRandEngine();
         byte[] bytes;
 
         re.engineNextBytes(bytes = new byte[0]);
@@ -182,7 +182,7 @@ public class RdrandEngineTest {
 
     @Test
     public void test_valid_seed_sizes() {
-        RdrandEngine re = new RdrandEngine();
+        RdRandEngine re = new RdRandEngine();
         byte[] seed;
 
         seed = re.engineGenerateSeed(0);
@@ -218,12 +218,12 @@ public class RdrandEngineTest {
 
     @Test(expected = NegativeArraySizeException.class)
     public void test_negative_seed_size_throws() {
-        new RdrandEngine().engineGenerateSeed(-1);
+        new RdRandEngine().engineGenerateSeed(-1);
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void test_set_seed_throws() {
-        new RdrandEngine().engineSetSeed(new byte[16]);
+        new RdRandEngine().engineSetSeed(new byte[16]);
     }
 
     @Test
@@ -232,13 +232,13 @@ public class RdrandEngineTest {
         try {
             // Change to an unsupported architecture and clear flags.
             getField(EngineTools.class, "osarch").set(null, "Z80");
-            Class<?> nativeMethods = RdrandEngine.class;
+            Class<?> nativeMethods = RdRandEngine.class;
             getField(nativeMethods, "isLinked").setBoolean(null, false);
-            getField(RdrandEngine.class, "isSupported").setBoolean(null, false);
+            getField(RdRandEngine.class, "isSupported").setBoolean(null, false);
 
             // Confirm native library load fails on this unexpected architecture.
             try {
-                new RdrandEngine();
+                new RdRandEngine();
                 fail();
             }
             catch (UnsupportedOperationException e) {
@@ -247,7 +247,7 @@ public class RdrandEngineTest {
 
             // Confirm it again. Should get the same failure.
             try {
-                new RdrandEngine();
+                new RdRandEngine();
                 fail();
             }
             catch (UnsupportedOperationException e) {
@@ -259,6 +259,6 @@ public class RdrandEngineTest {
         }
 
         // Confirm native library load now works after restoring original architecture.
-        new RdrandEngine();
+        new RdRandEngine();
     }
 }

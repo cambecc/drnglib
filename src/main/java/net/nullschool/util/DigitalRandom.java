@@ -53,7 +53,7 @@ public final class DigitalRandom extends SecureRandom {
      * @throws UnsupportedOperationException if the hardware DRNG does not exist or cannot be accessed.
      */
     public DigitalRandom() throws UnsupportedOperationException {
-        this(new RdrandEngine());
+        this(new RdRandEngine());
     }
 
     @Override

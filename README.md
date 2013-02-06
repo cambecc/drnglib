@@ -2,15 +2,15 @@
 
 **drnglib** (Digital Random Number Generator Library) is a Java 7 library that provides access to _Intel Secure Key_,
 the hardware random number generator introduced in the Ivy Bridge microarchitecture. This library retrieves
-cryptographically secure random values directly from the CPU using the `RDRAND` instruction. Access to `RDRAND` is
+cryptographically secure random values directly from the CPU using the `rdrand` instruction. Access to `rdrand` is
 implemented by a small native library embedded as a resource in the .jar file.
 
 The **DigitalRandom** class is provided as a drop-in replacement for
 [SecureRandom](http://docs.oracle.com/javase/7/docs/api/java/security/SecureRandom.html). It is thread-safe and
-stateless. All thread synchronization occurs in the hardware implementation of `RDRAND`.
+stateless. All thread synchronization occurs in the hardware implementation of `rdrand`.
 
 For more information see:
-* [Wikipedia: RDRAND](http://en.wikipedia.org/wiki/RDRAND)
+* [Wikipedia: RdRand](http://en.wikipedia.org/wiki/RdRand)
 * [Intel DRNG Software Implementation Guide](http://software.intel.com/en-us/articles/intel-digital-random-number-generator-drng-software-implementation-guide)
 * [Analysis of Intel's Ivy Bridge Digital Random Number Generator](http://www.cryptography.com/public/pdf/Intel_TRNG_Report_20120312.pdf) `PDF`
 
@@ -129,7 +129,7 @@ needs no thread synchronization.
 
 ###To build drnglib's native libraries:
 
-* [g++ 4.2](http://gcc.gnu.org/) or greater (Unix/Mac OSX)
+* [gcc 4.2](http://gcc.gnu.org/) or greater (Unix/Mac OSX)
 * [Visual Studio 2012](http://www.microsoft.com/visualstudio/eng/downloads#d-2012-express) any flavor (Windows)
 
 ##Build Instructions

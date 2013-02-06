@@ -24,7 +24,7 @@ public class DigitalRandomTest {
     static DigitalRandom mockInstance(long... values) {
         try {
             return setAccessible(DigitalRandom.class.getDeclaredConstructor(DigitalRandomSpi.class))
-                .newInstance(new MockRdrandEngine(values));
+                .newInstance(new MockRdRandEngine(values));
         }
         catch (Exception e) {
             throw new RuntimeException(e);

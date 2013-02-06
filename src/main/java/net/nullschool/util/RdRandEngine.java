@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.security.Key;
 
 import static net.nullschool.util.EngineTools.hashSHA256;
-import static net.nullschool.util.EngineTools.loadRdrandNativeLibrary;
+import static net.nullschool.util.EngineTools.loadRdRandNativeLibrary;
 
 
 /**
@@ -15,7 +15,7 @@ import static net.nullschool.util.EngineTools.loadRdrandNativeLibrary;
  *
  * @author Cameron Beccario
  */
-final class RdrandEngine extends DigitalRandomSpi {
+final class RdRandEngine extends DigitalRandomSpi {
 
     private static volatile boolean isSupported;
     private static volatile boolean isLinked;
@@ -24,13 +24,13 @@ final class RdrandEngine extends DigitalRandomSpi {
     private static void link() throws IOException {
         synchronized (lock) {
             if (!isLinked) {
-                loadRdrandNativeLibrary();
+                loadRdRandNativeLibrary();
                 isLinked = true;
             }
         }
     }
 
-    private static native boolean isRdrandSupported();
+    private static native boolean isRdRandSupported();
 
     static boolean linkAndCheckSupported() {
         if (isSupported) {
@@ -38,7 +38,7 @@ final class RdrandEngine extends DigitalRandomSpi {
         }
         try {
             link();
-            return isSupported = isRdrandSupported();
+            return isSupported = isRdRandSupported();
         }
         catch (Throwable t) {
             throw new UnsupportedOperationException(
@@ -48,7 +48,7 @@ final class RdrandEngine extends DigitalRandomSpi {
     }
 
 
-    RdrandEngine() throws UnsupportedOperationException {
+    RdRandEngine() throws UnsupportedOperationException {
         if (!linkAndCheckSupported()) {
             throw new UnsupportedOperationException(
                 "Random number generation using rdrand is not supported by this CPU.");
