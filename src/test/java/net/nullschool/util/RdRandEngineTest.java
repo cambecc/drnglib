@@ -61,12 +61,12 @@ public class RdRandEngineTest {
     public static void beforeClass() throws IOException {
         // If this throws, then native method linking failed, which means we can't even ask the CPU if
         // it supports rdrand.
-        RdRandEngine.linkAndCheckSupported();
+        RdRandEngine.linkAndCheckRdRandSupported();
     }
 
     @Before
     public void beforeMethod() throws IOException {
-        Assume.assumeTrue("RdRand not supported by this CPU.", RdRandEngine.linkAndCheckSupported());
+        Assume.assumeTrue("RdRand not supported by this CPU.", RdRandEngine.linkAndCheckRdRandSupported());
     }
 
     @Test
