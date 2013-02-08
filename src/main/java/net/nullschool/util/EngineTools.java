@@ -31,6 +31,7 @@ final class EngineTools {
 
 
     private EngineTools() {
+        throw new AssertionError();
     }
 
     private static String packageOf(Class<?> clazz) {

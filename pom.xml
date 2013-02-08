@@ -2,7 +2,7 @@
 <!--
   ~~ drnglib Project definition
   ~~
-  ~~ License: CC0 1.0 Universal, http://creativecommons.org/publicdomain/zero/1.0/
+  ~~ Released to the public domain: http://creativecommons.org/publicdomain/zero/1.0/
   ~~
   ~~ @author Cameron Beccario
   -->
@@ -23,6 +23,7 @@
     <name>drnglib</name>
     <description>Digital Random Number Generator Library</description>
     <url>https://github.com/cambecc/drnglib</url>
+    <inceptionYear>2013</inceptionYear>
 
     <licenses>
         <license>
@@ -66,19 +67,6 @@
     </dependencies>
 
     <build>
-        <!-- Include the license file as a resource. -->
-        <resources>
-            <resource>
-                <directory>${project.basedir}/src/main/resources</directory>
-            </resource>
-            <resource>
-                <directory>${project.basedir}</directory>
-                <includes>
-                    <include>LICENSE.md</include>
-                </includes>
-            </resource>
-        </resources>
-
         <plugins>
             <!-- Compile with Java 7. -->
             <plugin>

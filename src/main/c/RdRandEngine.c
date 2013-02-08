@@ -1,7 +1,7 @@
 /**
  * 2013-02-03
  *
- * Implementation of the JNI entry points. An rdrand failure, which should be exceedingly
+ * Implementation of the JNI entry points. An rdrand failure, which should be very
  * rare, is communicated to the calling Java program as an IllegalStateException.
  *
  * Released to the public domain: http://creativecommons.org/publicdomain/zero/1.0/
