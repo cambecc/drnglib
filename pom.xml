@@ -88,10 +88,10 @@
                 <executions>
                     <execution>
                         <id>javah</id>
+                        <phase>process-test-classes</phase>
                         <goals>
                             <goal>java</goal>
                         </goals>
-                        <phase>process-test-classes</phase>
                         <configuration>
                             <mainClass>net.nullschool.util.JavahLauncher</mainClass>
                             <classpathScope>test</classpathScope>
