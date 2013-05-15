@@ -23,7 +23,7 @@ Follow these two steps to start generating random numbers:
     <dependency>
         <groupId>net.nullschool</groupId>
         <artifactId>drnglib</artifactId>
-        <version>{latest version on central}</version>
+        <version>0.9.1</version>
     </dependency>
 ```
 
