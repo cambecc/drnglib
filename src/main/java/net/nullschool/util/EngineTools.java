@@ -21,6 +21,7 @@ import java.util.Random;
  */
 final class EngineTools {
 
+    private static final int MAX_UNPACK_RETRIES = 10;
     private static final List<String> X86 = Arrays.asList("x86", "i386");
     private static final List<String> X64 = Arrays.asList("x86_64", "amd64");
     private static final Random rand = new Random();
@@ -104,7 +105,7 @@ final class EngineTools {
                 String.format("Cannot find resource '%s' for %s %s architecture.", library, osname, osarch));
         }
 
-        for (int i = 0; i < 10; i++) {  // UNDONE: magic number 10?
+        for (int i = 0; i < MAX_UNPACK_RETRIES; i++) {
             Path p = unpackTemporaryResource(RdRandEngine.class, library);
             if (p == null || !Files.exists(p)) {
                 break;

@@ -34,7 +34,7 @@ abstract class DigitalRandomSpi extends SecureRandomSpi {
      *
      * @param bytes the array to fill with random data.
      */
-    protected abstract void engineNextBytes(byte[] bytes);
+    @Override protected abstract void engineNextBytes(byte[] bytes);
 
     /**
      * Returns a byte array of the specified length filled with seed-quality
@@ -43,7 +43,7 @@ abstract class DigitalRandomSpi extends SecureRandomSpi {
      * @param length the length of the seed to generate, in bytes.
      * @return the seed
      */
-    protected abstract byte[] engineGenerateSeed(int length);
+    @Override protected abstract byte[] engineGenerateSeed(int length);
 
 
     private static final long serialVersionUID = 1;

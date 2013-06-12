@@ -56,8 +56,7 @@ public final class DigitalRandom extends SecureRandom {
         this(new RdRandEngine());
     }
 
-    @Override
-    public String getAlgorithm() {
+    @Override public String getAlgorithm() {
         return "DRNG";
     }
 
@@ -66,8 +65,7 @@ public final class DigitalRandom extends SecureRandom {
      *
      * @return a random value chosen uniformly from the set {@code {true, false}}
      */
-    @Override
-    public boolean nextBoolean() {
+    @Override public boolean nextBoolean() {
         return spi.engineNextInt() < 0;
     }
 
@@ -77,8 +75,7 @@ public final class DigitalRandom extends SecureRandom {
      * @return a random value chosen uniformly from the range
      *         {@code [Integer.MIN_VALUE, Integer.MAX_VALUE]}
      */
-    @Override
-    public int nextInt() {
+    @Override public int nextInt() {
         return spi.engineNextInt();
     }
 
@@ -90,8 +87,7 @@ public final class DigitalRandom extends SecureRandom {
      * @return a random value chosen uniformly from the range {@code [0, bound)}
      * @throws IllegalArgumentException if bound is not positive
      */
-    @Override
-    public int nextInt(int bound) {
+    @Override public int nextInt(int bound) {
         if (bound <= 0) {
             throw new IllegalArgumentException("bound must be positive.");
         }
@@ -145,8 +141,7 @@ public final class DigitalRandom extends SecureRandom {
      * @return a random value chosen uniformly from the range
      *         {@code [Long.MIN_VALUE, Long.MAX_VALUE]}
      */
-    @Override
-    public long nextLong() {
+    @Override public long nextLong() {
         return spi.engineNextLong();
     }
 
@@ -197,8 +192,7 @@ public final class DigitalRandom extends SecureRandom {
      *
      * @return a random value chosen uniformly from the range {@code [0.0, 1.0)}
      */
-    @Override
-    public float nextFloat() {
+    @Override public float nextFloat() {
         return (spi.engineNextInt() & KEEP_24_BITS) / (float)(1 << 24);
     }
 
@@ -208,8 +202,7 @@ public final class DigitalRandom extends SecureRandom {
      *
      * @return a random value chosen uniformly from the range {@code [0.0, 1.0)}
      */
-    @Override
-    public double nextDouble() {
+    @Override public double nextDouble() {
         return (spi.engineNextLong() & KEEP_53_BITS) / (double)(1L << 53);
     }
 
@@ -248,8 +241,7 @@ public final class DigitalRandom extends SecureRandom {
      * @param bytes the array to fill with random bytes.
      * @throws IllegalArgumentException if {@code bytes} is null
      */
-    @Override
-    public void nextBytes(byte[] bytes) {
+    @Override public void nextBytes(byte[] bytes) {
         spi.engineNextBytes(bytes);
     }
 

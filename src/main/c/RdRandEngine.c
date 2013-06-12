@@ -285,9 +285,9 @@ Java_net_nullschool_util_RdRandEngine_engineNextBytes(JNIEnv* env, jobject obj, 
         return;
     }
 
-    // UNDONE: GetByteArrayElements seems to always copy. Maybe that's okay even if input array is 100MB.
-    //         But perhaps it would be better to fill the java array in chunks using SetByteArrayRegion, to
-    //         avoid a huge array copy.
+    // CONSIDER: GetByteArrayElements seems to always copy. Maybe that's okay even if input array is 100MB.
+    //           But perhaps it would be better to fill the java array in chunks using SetByteArrayRegion, to
+    //           avoid a huge array copy.
     length = (*env)->GetArrayLength(env, bytes);
     buffer = (*env)->GetByteArrayElements(env, bytes, NULL);
     if (buffer == NULL) {
