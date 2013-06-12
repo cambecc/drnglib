@@ -17,7 +17,7 @@
 
     <groupId>net.nullschool</groupId>
     <artifactId>drnglib</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>drnglib</name>
@@ -45,7 +45,7 @@
         <connection>scm:git:git@github.com:cambecc/drnglib.git</connection>
         <developerConnection>scm:git:git@github.com:cambecc/drnglib.git</developerConnection>
         <url>https://github.com/cambecc/drnglib.git</url>
-      <tag>drnglib-1.0.0</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <properties>
