@@ -45,8 +45,8 @@
         <connection>scm:git:git@github.com:cambecc/drnglib.git</connection>
         <developerConnection>scm:git:git@github.com:cambecc/drnglib.git</developerConnection>
         <url>https://github.com/cambecc/drnglib.git</url>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
